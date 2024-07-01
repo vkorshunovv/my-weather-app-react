@@ -1,6 +1,6 @@
 .app {
     background: linear-gradient(#c4b5fd, #c7d2fe);
-    width: 100wh;
+    width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;

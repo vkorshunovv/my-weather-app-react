@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 60%;
+    width: 30%;
     height: 80%;
     background: linear-gradient(#5b21b6,#4f46e5);
     border-radius: 2rem;
@@ -61,4 +61,17 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    font-size: 1.3rem;
+    color: var(--white);
+}
+
+.humidity-container, .wind-speed {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.humidity-container p:first-child, .wind-speed p:first-child {
+    font-size: 2rem;
 }

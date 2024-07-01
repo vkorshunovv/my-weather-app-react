@@ -4,13 +4,12 @@ import "./Weather.css";
 const Weather = () => {
   const API_KEY_ID = "330e43a6758846a7a2783931242906";
 
-  const inputHTML = document.querySelector(".input");
-
   const [weatherData, setWeatherData] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const url = async (city) => {
     try {
-      
       const response = await fetch(
         `http://api.weatherapi.com/v1/current.json?key=${API_KEY_ID}&q=${city}`
       );
@@ -23,9 +22,11 @@ const Weather = () => {
         icon: data.current.condition.icon,
       });
 
-      inputHTML.value = "";
+      setLoading(false);
+      setInputValue("");
     } catch (e) {
       console.log(e);
+      setLoading(false);
     }
   };
 
@@ -36,17 +37,27 @@ const Weather = () => {
   return (
     <div className="weather">
       <div className="searchbar">
-        <input type="text" placeholder="City" className="input" />
-        <button onClick={() => url(inputHTML.value)}>Go</button>
+        <input
+          type="text"
+          placeholder="City"
+          className="input"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button onClick={() => url(inputValue)}>Go</button>
       </div>
-      <div className="main-info">
-        <img src={weatherData.icon} alt="Weather condition" />
-        <p className="temparature">{weatherData.degree}&deg; C</p>
-        <p className="city">{weatherData.city}</p>
-      </div>
+      {loading ? (
+        "Loading..."
+      ) : (
+        <div className="main-info">
+          <img src={weatherData.icon} alt="Weather condition" />
+          <p className="temparature">{weatherData.degree}&deg; C</p>
+          <p className="city">{weatherData.city}</p>
+        </div>
+      )}
       <div className="additional-info">
         <div className="humidity-container">
-          <p>{weatherData.humidity}</p>
+          <p>{weatherData.humidity} %</p>
           <p>Humidity</p>
         </div>
         <div className="wind-speed">
